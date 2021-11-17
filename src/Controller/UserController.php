@@ -41,7 +41,6 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="user_new", methods={"GET","POST"})
      * @param Request $request
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param EntityManagerInterface $entityManager
      * @return Response
      */
@@ -58,7 +57,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_login', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('user/new.html.twig', [

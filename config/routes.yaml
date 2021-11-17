@@ -1,3 +1,6 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+homepage:
+  path: /login
+  controller: src\Controller\SecurityController::login
+
+  defaults:
+    template: templates/security/login.html.twig

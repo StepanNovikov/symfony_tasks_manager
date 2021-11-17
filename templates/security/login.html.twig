@@ -3,42 +3,45 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post" action="{{ path('app_login') }}">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+    <section class="vh-100 bg-image" style="background-image: url('https://mdbootstrap.com/img/Photos/new-templates/search-box/img4.jpg');">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-5">
+                                <h2 class="text-uppercase text-center mb-5">Sign in</h2>
+                                <form action="{{ path('app_login') }}" method="post">
+                                    {% if error %}
+                                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                    {% endif %}
+                                    <div class="form-outline mb-4">
+                                        <input type="email" placeholder="Email" name="email" id="inputEmail"
+                                               class="form-control form-control-lg" required autofocus
+                                        >
+                                    </div>
+                                    <div class="form-outline mb-2">
+                                        <input type="password" placeholder="Password" name="password" id="inputPassword"
+                                               class="form-control form-control-lg" autocomplete="current-password" required
+                                        >
+                                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                    </div>
+                                    <div class="form-outline mb-2">
+                                        <input type="checkbox" id="remember_me" name="_remember_me"/>
+                                        <label for="remember_me" class="form-control-lg">Remember me </label>
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" class="btn btn-block btn-lg gradient-custom-4" style="color: white!important;">Sign in</button>
+                                    </div>
+                                    <p class="text-center text-muted mt-4 mb-0"><a href="{{ path('user_new') }}" class="fw-bold text-body"><u>Register here</u></a></p>
 
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="username">Email</label>
-{#    <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>#}
-{#    <input type="text" id="username" name="_username" value="{{ last_username }}"/>#}
-    <input type="email" name="email" id="inputEmail" class="form-control" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    </section>
 {% endblock %}
