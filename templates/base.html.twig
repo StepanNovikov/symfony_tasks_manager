@@ -18,27 +18,25 @@
         {% endblock %}
     </head>
     <body>
-{#        <nav class="navbar navbar-light bg-light">#}
-{#            {% if app.user %}#}
-{#                <div>#}
-{#                    Привет, {{ app.user.username }} <a class="btn btn-sm btn-danger" href="{{ path('app_logout') }}">Выход</a>#}
-{#                </div>#}
-{#            {% else %}#}
-{#                <div>#}
-{#                    <a class="btn btn-sm btn-primary" href="{{ path('user_new') }}">Регистрация</a>#}
-{#                    <a class="btn btn-sm btn-success" href="{{ path('app_login') }}">Авторизация</a>#}
-{#                </div>#}
-{#            {% endif %}#}
-{#        </nav>#}
-{#        <div class="container">#}
-{#            {% if message is defined %}#}
-{#                <div class="alert alert-danger">#}
-{#                    {{ message }}#}
-{#                </div>#}
-{#            {% endif %}#}
-{#            {% block body %}#}
-{#            {% endblock %}#}
-{#        </div>#}
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-light bg-light d-flex">
+                {% if app.user %}
+                    <a class="btn btn-primary me-3" href="{{ path('user_index') }}">Go to dashboard</a>
+                    <a class="btn btn-danger" href="{{ path('app_logout') }}">Logout</a>
+
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+
+        <div class="container">
+            {% if message is defined %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endif %}
+        </div>
             {% block body %}
             {% endblock %}
     </body>

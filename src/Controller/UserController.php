@@ -51,7 +51,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
 
             $entityManager->persist($user);
@@ -66,7 +65,11 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'user_show', methods: ['GET'])]
+    /**
+     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @param User $user
+     * @return Response
+     */
     public function show(User $user): Response
     {
         return $this->render('user/show.html.twig', [
@@ -74,13 +77,20 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
+    /**
+     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword($this->passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->flush();
 
             return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);

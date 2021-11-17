@@ -1,4 +1,19 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <div class="input-group">
+        <span class="input-group-text">{{ form_label(form.fullname) }}</span>
+        {{ form_widget(form.fullname) }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">{{ form_label(form.roles) }}</span>
+        {{ form_widget(form.roles) }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">{{ form_label(form.email) }}</span>
+        {{ form_widget(form.email) }}
+    </div>
+    <div class="input-group">
+        <span class="input-group-text">{{ form_label(form.password) }}</span>
+        {{ form_widget(form.password) }}
+    </div>
+    <button class="btn btn-warning mt-2">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -22,9 +22,12 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $helper, Security $security): Response
     {
-        if ($security->isGranted('ROLE_USER') || $security->isGranted('ROLE_DEVELOPER') ||
-            $security->isGranted('ROLE_ADMIN')) {
+        if ($security->isGranted('ROLE_QA') || $security->isGranted('ROLE_DEVELOPER')
+        || $security->isGranted('ROLE_PM')) {
             return $this->redirectToRoute('show_dashboard');
+        }
+        if($security->isGranted('ROLE_ADMIN')){
+            return $this->redirectToRoute('user_index');
         }
 
       return $this->render('security/login.html.twig', [
