@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New User{% endblock %}
+
+{% block body %}
+    <h1>Create new User</h1>
+
+    {{ form_start(form, {'attr': {'id': 'new_edit_user'}}) }}
+        <div class="row">
+            <div class="col-12">
+                {{ form_label(form.email) }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="col-12">
+                {{ form_label(form.password) }}
+                {{ form_widget(form.password) }}
+            </div>
+            <div class="col-12">
+                <label for="verify-password">Введите пароль повторно</label>
+                <input type="password" id="verify-password" required>
+            </div>
+        </div>
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('user_index') }}">back to list</a>
+{% endblock %}
