@@ -41,6 +41,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $fullname;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_confirm;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -140,6 +145,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFullname(string $fullname): self
     {
         $this->fullname = $fullname;
+
+        return $this;
+    }
+
+    public function getIsConfirm(): ?bool
+    {
+        return $this->is_confirm;
+    }
+
+    public function setIsConfirm(?bool $is_confirm): self
+    {
+        $this->is_confirm = $is_confirm;
 
         return $this;
     }

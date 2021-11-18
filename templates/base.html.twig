@@ -10,12 +10,6 @@
             <link rel="stylesheet" href="{{ asset("assets/framework/bootstrap/css/bootstrap.css") }}">
             <link rel="stylesheet" href="{{ asset("assets/css/style.css") }}">
         {% endblock %}
-
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-            <script src="{{ asset("assets/framework/bootstrap/js/bootstrap.js") }}"></script>
-            <script src="{{ asset("assets/js/script.js") }}"></script>
-        {% endblock %}
     </head>
     <body>
     <div class="container-fluid">
@@ -39,5 +33,12 @@
         </div>
             {% block body %}
             {% endblock %}
+    {% block javascripts %}
+        {#{{ encore_entry_script_tags('app') }}#}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ asset("assets/framework/bootstrap/js/bootstrap.js") }}"></script>
+        <script src="{{ asset("assets/js/script.js") }}"></script>
+    {% endblock %}
     </body>
 </html>

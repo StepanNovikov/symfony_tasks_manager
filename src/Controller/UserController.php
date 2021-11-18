@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/user")
@@ -102,7 +101,13 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
+    /**
+     * @Route("/{id}", name="user_delete", methods={"POST"})
+     * @param Request $request
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
@@ -111,5 +116,25 @@ class UserController extends AbstractController
         }
 
         return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    /**
+     * @Route("/confirm/{id}", name="user_confirm", methods={"POST"})
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param UserRepository $userRepository
+     * @return array
+     */
+    public function confirmRole(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    {
+        $id = $request->request->get("id");
+        $checkValue = $request->request->get("checked");
+        $user = $userRepository->find($id);
+
+        $user->setIsConfirm($checkValue=="true"?"1":null);
+        $entityManager->flush();
+
+        return $this->json(["fullname" => $user->getFullname(),"status" => $checkValue]);
+
     }
 }

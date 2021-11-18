@@ -6,11 +6,13 @@
     <div class="container">
         <div class="row text-center">
             <h1>Registered users</h1>
-            <h5 class="fw-bold text-danger">You must confirm role for users in right column</h5>
+            <h5 class="fw-bold text-danger">You must confirm role for users </h5>
+
             <table class="table table-bordered">
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">Confirm</th>
                     <th scope="col">Fullname</th>
                     <th scope="col">Email</th>
                     <th scope="col">Roles</th>
@@ -21,6 +23,9 @@
                 {% for user in users %}
                     <tr>
                         <td>{{ user.id }}</td>
+                        <td>
+                            <input id="{{ user.id }}" class="confirm" type="checkbox" {{ user.getIsConfirm() is null?'':'checked' }}>
+                        </td>
                         <td>{{ user.fullname }}</td>
                         <td>{{ user.email }}</td>
                         <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
